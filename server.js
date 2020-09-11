@@ -50,5 +50,20 @@ server.get('/tasks', (req, res) => {
         .catch(err => res.status(500).json({ error: "Server error" }))
 })
 
+// ASSIGN A RESOURCE TO A PROJECT
+server.post('/assignResource', (req, res) => {
+    db.assignResource(req.body)
+        .then(result => res.status(200).json({ data: result }))
+        .catch(err => res.status(500).json({ error: "Server error" }))
+})
+
+// GET RESOURCES FOR A PROJECT
+server.get('/projects/:id/resources', (req, res) => {
+    const id = Number(req.params.id);
+    db.getResourceByProject(id)
+        .then(result => res.status(200).json({ data: result }))
+        .catch(err => res.status(500).json({ error: "Server error" }))
+})
+
 
 module.exports = server;
