@@ -23,13 +23,32 @@ server.get('/resources', (req, res) => {
 })
 
 // ADDING PROJECT
+server.post('/projects', (req, res) => {
+    db.addProject(req.body)
+        .then(result => res.status(200).json({ data: result }))
+        .catch(err => res.status(500).json({ error: "Server error" }))
+})
 
 // GET PROJECTS
+server.get('/projects', (req, res) => {
+    db.getProjects()
+        .then(result => res.status(200).json({ data: result }))
+        .catch(err => res.status(500).json({ error: "Server error" }))
+})
 
 // ADDING TASK
+server.post('/tasks', (req, res) => {
+    db.addTask(req.body)
+        .then(result => res.status(200).json({ data: result }))
+        .catch(err => res.status(500).json({ error: "Server error" }))
+})
 
 // GET TASKS
-
+server.get('/tasks', (req, res) => {
+    db.getTasks()
+        .then(result => res.status(200).json({ data: result }))
+        .catch(err => res.status(500).json({ error: "Server error" }))
+})
 
 
 module.exports = server;
